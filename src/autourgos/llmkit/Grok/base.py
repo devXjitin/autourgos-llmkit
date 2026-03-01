@@ -4,7 +4,7 @@ xAI Grok LLM Provider
 Production-ready wrapper around xAI's Grok client (OpenAI-compatible API).
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Dict, Any
@@ -285,7 +285,7 @@ class GrokLLM:
     
     Example:
         >>> llm = GrokLLM(model="grok-beta", api_key="your-key")
-        >>> response = llm.generate_response("What is Python?")
+        >>> response = llm.invoke("What is Python?")
         >>> print(response)
     """
     

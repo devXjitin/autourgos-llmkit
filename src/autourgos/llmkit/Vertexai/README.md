@@ -332,7 +332,7 @@ Please ensure your code follows the project's coding standards and includes appr
 
 ## License
 
-This project is licensed under the MIT License - see the `pyproject.toml` file for details.
+This project is licensed under a Proprietary License - see the `LICENSE` file in the root directory for details.
 
 ## Support
 

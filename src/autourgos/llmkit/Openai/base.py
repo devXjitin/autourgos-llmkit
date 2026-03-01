@@ -4,7 +4,7 @@ OpenAI LLM Provider
 Production-ready wrapper around OpenAI's client.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Dict, Any
@@ -274,7 +274,7 @@ class OpenAILLM:
     
     Example:
         >>> llm = OpenAILLM(model="gpt-5.2", api_key="your-key")
-        >>> response = llm.generate_response("What is Python?")
+        >>> response = llm.invoke("What is Python?")
         >>> print(response)
     """
     

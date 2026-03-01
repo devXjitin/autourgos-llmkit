@@ -4,7 +4,7 @@ Ollama Local LLM Provider
 Production-ready wrapper for local Ollama instance using native ollama client.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Dict, Any
@@ -250,7 +250,7 @@ class OllamaLocalLLM:
     
     Example:
         >>> llm = OllamaLocalLLM(model="llama2")
-        >>> response = llm.generate_response("What is Python?")
+        >>> response = llm.invoke("What is Python?")
         >>> print(response)
     """
     
@@ -276,7 +276,7 @@ class OllamaLocalLLM:
         self.timeout = timeout
         self.backoff_factor = backoff_factor
     
-    def generate_response(self, prompt: str) -> str:
+    def invoke(self, prompt: str) -> str:
         """Generate a response from local Ollama.
         
         Returns only the text content for backward compatibility.
@@ -295,14 +295,14 @@ class OllamaLocalLLM:
         )
         return result["content"]
     
-    def generate_response_stream(self, prompt: str):
+    def stream(self, prompt: str):
         """Generate a streaming response from local Ollama.
         
         Yields text chunks as they are generated.
         
         Example:
             >>> llm = OllamaLocalLLM(model="llama2")
-            >>> for chunk in llm.generate_response_stream("Write a story"):
+            >>> for chunk in llm.stream("Write a story"):
             ...     print(chunk, end='', flush=True)
         """
         return ollama_local_llm_stream(

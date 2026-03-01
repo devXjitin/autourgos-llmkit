@@ -4,7 +4,7 @@ Anthropic Claude LLM Provider
 Production-ready wrapper around Anthropic's client.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Dict, Any
@@ -259,7 +259,7 @@ class AnthropicLLM:
     
     Example:
         >>> llm = AnthropicLLM(model="claude-3-5-sonnet-20241022", api_key="your-key")
-        >>> response = llm.generate_response("What is Python?")
+        >>> response = llm.invoke("What is Python?")
         >>> print(response)
     """
     

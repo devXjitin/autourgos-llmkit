@@ -4,7 +4,7 @@ Ollama Cloud LLM Provider
 Production-ready wrapper around Ollama Cloud client.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Dict, Any
@@ -279,7 +279,7 @@ class OllamaCloudLLM:
     
     Example:
         >>> llm = OllamaCloudLLM(model="llama2", api_key="your-key")
-        >>> response = llm.generate_response("What is Python?")
+        >>> response = llm.invoke("What is Python?")
         >>> print(response)
     """
     
@@ -307,7 +307,7 @@ class OllamaCloudLLM:
         self.timeout = timeout
         self.backoff_factor = backoff_factor
     
-    def generate_response(self, prompt: str) -> str:
+    def invoke(self, prompt: str) -> str:
         """Generate a response from Ollama Cloud.
         
         Returns only the text content for backward compatibility.
@@ -327,14 +327,14 @@ class OllamaCloudLLM:
         )
         return result["content"]
     
-    def generate_response_stream(self, prompt: str):
+    def stream(self, prompt: str):
         """Generate a streaming response from Ollama Cloud.
         
         Yields text chunks as they are generated.
         
         Example:
             >>> llm = OllamaCloudLLM(model="llama2")
-            >>> for chunk in llm.generate_response_stream("Write a story"):
+            >>> for chunk in llm.stream("Write a story"):
             ...     print(chunk, end='', flush=True)
         """
         return ollama_cloud_llm_stream(

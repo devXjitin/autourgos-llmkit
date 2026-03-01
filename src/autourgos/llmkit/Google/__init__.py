@@ -9,7 +9,7 @@ Example:
     >>> 
     >>> # Class-based
     >>> llm = GoogleLLM(model="gemini-1.5-pro", api_key="your-key")
-    >>> response = llm.generate_response("What is AI?")
+    >>> response = llm.invoke("What is AI?")
     >>> 
     >>> # Function-based
     >>> response = google_llm(
@@ -19,7 +19,7 @@ Example:
     ... )
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from .base import (

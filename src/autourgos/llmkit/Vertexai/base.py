@@ -7,7 +7,7 @@ Supports first-party (Gemini) and third-party Model Garden models such as
 Claude, Llama, Mistral, Moonshot Kimi, DeepSeek, and more.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Generator, List, Dict, Any
@@ -503,7 +503,7 @@ class VertexAILLM:
         ...     model="moonshotai/kimi-k2-thinking-maas",
         ...     project_id="my-gcp-project",
         ... )
-        >>> response = llm.generate_response("Hello, how are you?")
+        >>> response = llm.invoke("Hello, how are you?")
         >>> print(response)
     """
 
@@ -551,7 +551,7 @@ class VertexAILLM:
         self.timeout = timeout
         self.backoff_factor = backoff_factor
 
-    def generate_response(self, prompt: str) -> str:
+    def invoke(self, prompt: str) -> str:
         """Generate a response from Vertex AI.
 
         Returns only the text content for backward compatibility.
@@ -574,14 +574,14 @@ class VertexAILLM:
         )
         return result["content"]
 
-    def generate_response_stream(self, prompt: str):
+    def stream(self, prompt: str):
         """Generate a streaming response from Vertex AI.
 
         Yields text chunks as they are generated.
 
         Example:
             >>> llm = VertexAILLM(model="google/gemini-2.0-flash", project_id="my-proj")
-            >>> for chunk in llm.generate_response_stream("Write a story"):
+            >>> for chunk in llm.stream("Write a story"):
             ...     print(chunk, end='', flush=True)
         """
         return vertexai_llm_stream(

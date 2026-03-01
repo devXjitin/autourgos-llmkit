@@ -5,10 +5,10 @@ A unified interface for multiple LLM providers including Google Gemini,
 Anthropic Claude, OpenAI GPT, Grok, Azure OpenAI, and Ollama.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"
 
 from typing import Optional, Any
 
@@ -69,8 +69,8 @@ def init_llm(
             - access_token: Bearer token (or pass via api_key)
     
     Returns:
-        An initialized LLM class instance with generate_response() and 
-        generate_response_stream() methods.
+        An initialized LLM class instance with invoke() and 
+        stream() methods.
     
     Raises:
         ValueError: If provider is not supported or required parameters are missing.
@@ -80,16 +80,16 @@ def init_llm(
         >>> 
         >>> # OpenAI GPT-4
         >>> llm = init_llm(provider="openai", model="gpt-4o", api_key="your-key")
-        >>> response = llm.generate_response("What is Python?")
+        >>> response = llm.invoke("What is Python?")
         >>> print(response)
         >>> 
         >>> # Streaming response
-        >>> for chunk in llm.generate_response_stream("Write a story"):
+        >>> for chunk in llm.stream("Write a story"):
         ...     print(chunk, end='', flush=True)
         >>> 
         >>> # Google Gemini
         >>> llm = init_llm(provider="google", model="gemini-2.0-flash-exp", api_key="your-key")
-        >>> response = llm.generate_response("Explain AI")
+        >>> response = llm.invoke("Explain AI")
         >>> 
         >>> # Anthropic Claude
         >>> llm = init_llm(provider="anthropic", model="claude-3-5-sonnet-20241022", 
@@ -97,7 +97,7 @@ def init_llm(
         >>> 
         >>> # Local Ollama
         >>> llm = init_llm(provider="ollama", model="llama2")
-        >>> response = llm.generate_response("Hello!")
+        >>> response = llm.invoke("Hello!")
     """
     provider_lower = provider.lower().strip()
     
@@ -113,17 +113,6 @@ def init_llm(
             timeout=kwargs.get("timeout", 30.0),
         )
     
-    # Google Gemini Vision
-    elif provider_lower in ["google-vision", "gemini-vision"]:
-        from autourgos.llmkit.GoogleVision.base import GoogleVisionLLM
-        return GoogleVisionLLM(
-            model=model,
-            api_key=api_key,
-            temperature=kwargs.get("temperature"),
-            top_p=kwargs.get("top_p"),
-            max_tokens=kwargs.get("max_tokens"),
-            timeout=kwargs.get("timeout", 30.0),
-        )
     
     # Anthropic Claude
     elif provider_lower in ["anthropic", "claude"]:
@@ -255,8 +244,44 @@ def init_llm(
         )
 
 
+def init_vision_llm(
+    provider: str,
+    model: str,
+    api_key: Optional[str] = None,
+    **kwargs
+) -> Any:
+    """Initialize a Vision LLM provider.
+    
+    Args:
+        provider: Vision LLM provider name. Supported values:
+            - "google", "gemini", "google-vision", "gemini-vision" - Google Gemini Vision
+        model: Model identifier (e.g. "gemini-pro-vision")
+        api_key: API key for the provider
+        **kwargs: Additional provider-specific parameters
+    
+    Returns:
+        An initialized Vision LLM class instance.
+    """
+    provider_lower = provider.lower().strip()
+    
+    # Google Gemini Vision
+    if provider_lower in ["google", "gemini", "google-vision", "gemini-vision"]:
+        from autourgos.llmkit.GoogleVision.base import GoogleVisionLLM
+        return GoogleVisionLLM(
+            model=model,
+            api_key=api_key,
+            temperature=kwargs.get("temperature"),
+            top_p=kwargs.get("top_p"),
+            max_tokens=kwargs.get("max_tokens"),
+            timeout=kwargs.get("timeout", 30.0),
+        )
+    
+    raise ValueError(f"Unsupported vision provider: '{provider}'")
+
+
 __all__ = [
     "init_llm",
+    "init_vision_llm",
     "GoogleLLM",
     "GoogleVisionLLM",
     "AnthropicLLM",

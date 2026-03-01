@@ -3,7 +3,7 @@
 <div align="center">
 
 ![Python Version](https://img.shields.io/pypi/pyversions/autourgos-llmkit)
-![License](https://img.shields.io/github/license/devXjitin/autourgos-llmkit)
+![License](https://img.shields.io/badge/License-Proprietary-red)
 ![Status](https://img.shields.io/badge/status-production--ready-green)
 
 **The lightweight, unified interface for state-of-the-art LLMs.**  
@@ -21,7 +21,7 @@ Building AI agents requires flexibility. Today you might use **GPT-4o** for reas
 
 **Autourgos LLM Kit** solves this without the bloat. Unlike heavy frameworks (LangChain, LlamaIndex) that enforce specific cognitive architectures, this library focuses solely on the **connectivity layer**.
 
-*   **Unified Interface**: One `generate_response()` signature for all providers.
+*   **Unified Interface**: One `invoke()` signature for all providers.
 *   **Zero Lock-in**: Switch from OpenAI to Vertex AI to Ollama just by changing a config string.
 *   **Production Hardened**: Built-in exponential backoff, retries, and standardized exception handling.
 *   **Type Safe**: Fully typed for modern Python development.
@@ -77,12 +77,12 @@ llm = init_llm(
 )
 
 # 3. Generate text
-response = llm.generate_response("Explain the concept of 'Agentic Workflow' in one sentence.")
+response = llm.invoke("Explain the concept of 'Agentic Workflow' in one sentence.")
 print(f"Response: {response}")
 
 # 4. Stream text (Real-time)
 print("Streaming: ", end="")
-for chunk in llm.generate_response_stream("List 3 benefits of Python."):
+for chunk in llm.stream("List 3 benefits of Python."):
     print(chunk, end="", flush=True)
 print()
 ```
@@ -117,7 +117,7 @@ from autourgos.llmkit.GoogleVision import GoogleVisionLLM
 llm = GoogleVisionLLM(model="gemini-1.5-flash")
 
 # Pass local file paths or PIL Image objects
-response = llm.generate_response(
+response = llm.invoke(
     prompt="Extract all the text visible in this image.",
     images=["./receipt.jpg"]
 )
@@ -138,7 +138,7 @@ llm = AzureLLM(
     api_key="your-azure-key"
 )
 
-text = llm.generate_response("Solve this complex logic puzzle.")
+text = llm.invoke("Solve this complex logic puzzle.")
 ```
 
 ### Standardized Error Handling
@@ -150,7 +150,7 @@ from autourgos.llmkit.Openai import OpenAILLM, OpenAILLMAPIError, OpenAILLMAuthE
 
 try:
     llm = OpenAILLM(model="gpt-4o", api_key="invalid-key")
-    llm.generate_response("Hello")
+    llm.invoke("Hello")
 except OpenAILLMAuthError:
     print("Please check your API credentials.")
 except OpenAILLMAPIError as e:

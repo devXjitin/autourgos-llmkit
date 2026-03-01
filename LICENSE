@@ -1,12 +1,18 @@
+Copyright (c) 2026 Autourgos. All rights reserved.
+
 PROPRIETARY LICENSE
 
-Copyright (c) 2026 Autourgos Developer
+This software and associated documentation files (the "Software") are the proprietary property of Autourgos.
 
-All Rights Reserved.
+1. Non-Commercial Use Only:
+   The Software is provided for personal, educational, and internal research purposes only. Commercial use, including but not limited to using the Software to provide paid services, selling the Software, or integrating the Software into a commercial product, is strictly prohibited without a separate commercial license agreement.
 
-Redistribution and use in source and binary forms, with or without modification, 
-are strictly prohibited. 
+2. No Resale:
+   You may not sell, rent, lease, sublicense, or otherwise distribute the Software or any derivative works for a fee.
 
-This software and its associated documentation are the property of the copyright 
-holder. No part of this software may be copied, modified, sold, or distributed 
-without the express written permission of the copyright holder.
+3. Redistribution:
+   Redistribution of the Software in source or binary forms is permitted provided that:
+   - The above copyright notice and this permission notice appear in all copies.
+   - The Software is not sold or used for commercial gain.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

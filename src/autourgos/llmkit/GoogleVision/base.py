@@ -4,7 +4,7 @@ Google Gemini Vision LLM Provider
 Production-ready wrapper around Google's Generative AI client for Multimodal inputs.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Any, Dict, List, Union
@@ -570,7 +570,7 @@ class GoogleVisionLLM:
     
     Example:
         >>> llm = GoogleVisionLLM(model="gemini-3-flash-preview")
-        >>> response = llm.generate_response(
+        >>> response = llm.invoke(
         ...     prompt="What is in this image?",
         ...     images="path/to/image.jpg"
         ... )
@@ -600,7 +600,7 @@ class GoogleVisionLLM:
         self.timeout = timeout
         self.backoff_factor = backoff_factor
     
-    def generate_response(self, prompt: str, images: Optional[Union[str, List[str], Any, List[Any]]] = None) -> str:
+    def invoke(self, prompt: str, images: Optional[Union[str, List[str], Any, List[Any]]] = None) -> str:
         """
         Generate a response from the Google Gemini Vision model.
         
@@ -626,7 +626,7 @@ class GoogleVisionLLM:
         )
         return result["content"]
     
-    def generate_response_stream(self, prompt: str, images: Optional[Union[str, List[str], Any, List[Any]]] = None):
+    def stream(self, prompt: str, images: Optional[Union[str, List[str], Any, List[Any]]] = None):
         """
         Generate a streaming response from the Google Gemini Vision model.
         """

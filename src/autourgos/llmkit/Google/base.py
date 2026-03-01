@@ -4,7 +4,7 @@ Google Gemini LLM Provider
 Production-ready wrapper around Google's Generative AI client.
 
 Author: Autourgos Developer
-Version: 1.0.1
+Version: 1.1.0
 """
 
 from typing import Optional, Any, Dict
@@ -632,7 +632,7 @@ class GoogleLLM:
     
     Example:
         >>> llm = GoogleLLM(model="gemini-3-flash-preview", api_key="your-key")
-        >>> response = llm.generate_response("What is Python?")
+        >>> response = llm.invoke("What is Python?")
         >>> print(response)
     """
     
@@ -673,7 +673,7 @@ class GoogleLLM:
         self.timeout = timeout
         self.backoff_factor = backoff_factor
     
-    def generate_response(self, prompt: str) -> str:
+    def invoke(self, prompt: str) -> str:
         """
         Generate a response from the Google Gemini model.
         
@@ -707,7 +707,7 @@ class GoogleLLM:
         )
         return result["content"]
     
-    def generate_response_stream(self, prompt: str):
+    def stream(self, prompt: str):
         """
         Generate a streaming response from the Google Gemini model.
         
@@ -728,7 +728,7 @@ class GoogleLLM:
             
         Example:
             >>> llm = GoogleLLM(model="gemini-3-flash-preview", api_key="your-key")
-            >>> for chunk in llm.generate_response_stream("Write a story"):
+            >>> for chunk in llm.stream("Write a story"):
             ...     print(chunk, end='', flush=True)
         """
         return google_llm_stream(
